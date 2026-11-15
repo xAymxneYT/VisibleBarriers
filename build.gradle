@@ -1,0 +1,41 @@
+plugins {
+    id 'fabric-loom' version '1.13.6'
+    id 'ploceus' version '1.13.10'
+}
+group = 'dev.barrier'
+version = '0.5.0+1.8.9-ornithe-gen2'
+base { archivesName = 'visible-barriers' }
+repositories {
+    exclusiveContent {
+        forRepository { maven { url = 'https://repo.polyfrost.org/releases' } }
+        filter { includeGroup 'org.polyfrost.oneconfig' }
+    }
+    mavenCentral()
+}
+ploceus { intermediaryGeneration = 2 }
+dependencies {
+    minecraft 'com.mojang:minecraft:1.8.9'
+    mappings 'net.ornithemc:feather-gen2:1.8.9+build.2:v2'
+    modImplementation 'net.fabricmc:fabric-loader:0.19.5'
+
+    compileOnly('org.polyfrost.oneconfig:config-impl:1.7.1') { transitive = false }
+    compileOnly('org.polyfrost.oneconfig:config:1.7.1') { transitive = false }
+    compileOnly('org.polyfrost.oneconfig:utils:1.7.1') { transitive = false }
+    compileOnly 'org.jetbrains.kotlin:kotlin-stdlib:2.3.20'
+    compileOnly 'org.jetbrains:annotations:26.0.2'
+    compileOnly('org.polyfrost.oneconfig:poly-compose:1.7.1') { transitive = false }
+    compileOnly('org.polyfrost.oneconfig:ui:1.7.1') { transitive = false }
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+java { withSourcesJar() }
+processResources {
+    inputs.property 'version', version
+    filesMatching('fabric.mod.json') { expand 'version': version }
+}
+test { useJUnitPlatform() }
+jar { from('LICENSE') }

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "barrier",
+  "version": "${version}",
+  "name": "Visible Barriers",
+  "description": "Highly customizable visible barriers",
+  "environment": "client",
+  "license": "MIT",
+  "entrypoints": {
+    "client": [
+      "dev.barrier.BarrierClient"
+    ]
+  },
+  "mixins": [
+    "barrier.mixins.json"
+  ],
+  "depends": {
+    "minecraft": "1.8.9",
+    "fabricloader": ">=0.19.5",
+    "java": ">=21",
+    "oneconfig": ">=1.7.1"
+  },
+  "breaks": {
+    "lvb": "*",
+    "legacybarriers": "*",
+    "legacy_barriers": "*",
+    "visbarrier": "*"
+  },
+  "custom": {
+    "ornithe:intermediary-generation": 2
+  },
+  "icon": "assets/barrier/icon.png",
+  "authors": [
+    "xAymxneYT"
+  ]
+}
